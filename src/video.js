@@ -4,18 +4,23 @@ const getIdFromUrl = (url) => {
     return match ? match[1] : null;
 };
 
-var tag = document.createElement('script');
-
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-window.YTPlayer = null;
-
-const loadVideo = (url) => {
+export const loadVideo = (url) => {
     const videoContainer = document.querySelector("#videoContainer");
-    videoContainer.innerHTML = "";
-    window.YTPlayer = new YT.Player('videoContainer', {
-        videoId: loadVideo(url),
-    });
-}
+
+    // Limpa o conteúdo atual do container
+    videoContainer.innerHTML = '';
+
+    const videoId = getIdFromUrl(url);
+
+    // Verifica se o ID do vídeo foi encontrado
+    if (videoId) {
+        videoContainer.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${videoId}"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        `;
+    } else {
+        videoContainer.innerHTML = "<p>Link de vídeo inválido.</p>";
+    }
+};

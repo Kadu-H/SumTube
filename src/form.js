@@ -1,13 +1,10 @@
-import './video';
+import {loadVideo} from './video';
 
-const onSubmitVideo = () => {
+export const onSubmitVideo = (e) => {
+    e.preventDefault();
     const form = document.querySelector("#formLink");
     
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-    
-        const formData = new FormData(form);
-        const urlVideo = formData.get("videoLink");
-        loadVideo(urlVideo);
-    })
+    const formData = new FormData(form);
+    const urlVideo = formData.get("videoLink");
+    loadVideo(urlVideo);
 }
