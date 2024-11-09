@@ -1,3 +1,22 @@
+#conteudo{
+  margin-top: 20px;
+}
+
 #resumo{
   font-size: 1.9vh;
+}
+
+#legendaDiv{
+  height: 230px;
+}
+
+.classResumo{
+  margin-top: 25px;
+}
+
+#legendaRow{
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  text-decoration: none;
 }
