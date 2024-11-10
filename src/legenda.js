@@ -16,7 +16,7 @@ function slideScrollLegenda() {
     if(playerState == 2){
         return;
     }
-
+    
     var rows = document.querySelectorAll("#legendaRow");
     var videoTimeCurrent = player.getCurrentTime();
 
@@ -28,7 +28,7 @@ function slideScrollLegenda() {
 
         if (proxRow) {
             var offsetProximo = parseFloat(proxRow.getAttribute("offset"));
-            if (videoTimeCurrent >= offsetAtual && videoTimeCurrent <= offsetProximo) {
+            if (videoTimeCurrent >= offsetAtual && videoTimeCurrent < offsetProximo) {
                 row.scrollIntoView({ behavior: "smooth" });
                 break;
             }

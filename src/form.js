@@ -1,5 +1,40 @@
 import {loadVideo, getIdFromUrl, formatTime} from './video';
 
+export const onSubmitPDF = () => {
+    if(!onVideo){
+        return;
+    }
+
+    const data = {
+        resumo,
+        legenda,
+        titulo: player.getVideoData().title
+    };
+
+    fetch('http://localhost:3000/pdf', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data), 
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.status);
+        }
+        return response.blob(); // Espera o arquivo PDF como resposta
+    })
+    .then(blob => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `${data.titulo}.pdf`;  // Nome do arquivo
+        link.click(); // Inicia o download
+    })
+    .catch(error => {
+        console.error('Erro ao enviar a requisição:', error);
+    });
+};
+
 export const onSubmitVideo = async (e) => {
     e.preventDefault();
     const form = document.querySelector("#formLink");
@@ -26,6 +61,8 @@ export const onSubmitVideo = async (e) => {
 
     console.log(responseJson);
     const resumoTagText = document.querySelector("#resumo");
+    resumo = responseJson.summary;
+    legenda = responseJson.transcript;
     resumoTagText.textContent = responseJson.summary;
     createLegendas(responseJson.transcript);
     onVideo = true;
@@ -33,6 +70,7 @@ export const onSubmitVideo = async (e) => {
 
 function createLegendas(transcript){
     const legendaDiv = document.querySelector("#legendaDiv");
+    legendaDiv.innerHTML='';
     for (let index = 0; index < transcript.length; index++) {
         const button = document.createElement('button');
         button.classList.add('d-flex', 'justify-content-between', 'border-bottom', 'py-2');

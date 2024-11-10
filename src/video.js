@@ -13,15 +13,18 @@ export function formatTime(seconds) {
 export const loadVideo = (url, startTime = 0) => {
     const videoContainer = document.querySelector("#videoContainer");
 
-    videoContainer.innerHTML = '';
+    if (!onVideo) {
+        videoContainer.innerHTML = '';
+    }
 
     videoId = getIdFromUrl(url);
 
     if (videoId) {
-        videoContainer.innerHTML = `
+        if (!onVideo) {
+            videoContainer.innerHTML = `
             <div id="player"></div>
-        `;
-
+            `;
+        }
         loadYouTubePlayer(videoId, startTime);
     } else {
         videoContainer.innerHTML = "<p>Link de vídeo inválido.</p>";
