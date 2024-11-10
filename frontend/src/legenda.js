@@ -5,8 +5,6 @@ function clickLegenda(button) {
 }
 setInterval(slideScrollLegenda, 250);
 
-var posScrollY = 0;
-
 function slideScrollLegenda() {
     if (!onVideo) {
         return;

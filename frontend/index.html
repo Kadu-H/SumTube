@@ -7,51 +7,17 @@
   <title>Interface de Vídeo com Legenda e Resumo</title>
   <!-- Importação correta do Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="./Logo.png" type="image/x-icon">
   <script>
     var videoId;
-    var player;
-    var onVideo = false;
-
     var legenda;
     var resumo;
-
-    // Função para carregar o player do YouTube e configurar o tempo de início
-    const loadYouTubePlayer = (videoId, startTime) => {
-      // Se o YouTube API já foi carregado e o player já existe, apenas troca o vídeo
-      if (window.YT) {
-        player.loadVideoById(videoId, startTime); // Troca o vídeo
-        player.seekTo(0, true); // Vai para o tempo especificado
-        player.playVideo(); // Começa a reprodução
-        console.log(player)
-      } else {
-        // Carrega a API do YouTube caso ainda não tenha sido carregada
-        const script = document.createElement('script');
-        script.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(script);
-
-        // Aguarda a API do YouTube ser carregada
-        window.onYouTubeIframeAPIReady = () => {
-          console.log("teste");
-          window.player = new YT.Player('player', {
-            videoId: videoId,
-            width: "100%",
-            height: '230',
-            events: {
-              'onReady': (event) => {
-                // Após o player estar pronto, define o tempo de início
-                event.target.seekTo(startTime, true); // Vai para o tempo especificado
-                event.target.playVideo(); // Começa a reprodução
-              }
-            }
-          });
-        };
-      }
-    };
-
+    var onVideo = false;
+    var player;
   </script>
+  <script src="./src/youtube-api.js" type="module" ></script>
   <script src="./src/main.js" type="module"></script>
-  <script src="./src/video.js" type="module"></script>
-  <script src="./src/legenda.js"></script>
+  <script src="./src/legenda.js" type="module"></script>
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 

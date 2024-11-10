@@ -1,3 +1,5 @@
+import {loadYouTubePlayer} from './youtube-api.js';
+
 export const getIdFromUrl = (url) => {
     const regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})(?:\S+)?$/;
     const match = url.match(regex);
@@ -10,22 +12,20 @@ export function formatTime(seconds) {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
 
-export const loadVideo = (url, startTime = 0) => {
+export const loadVideo = (startTime = 0) => {
     const videoContainer = document.querySelector("#videoContainer");
 
     if (!onVideo) {
         videoContainer.innerHTML = '';
     }
-
-    videoId = getIdFromUrl(url);
-
+    
     if (videoId) {
         if (!onVideo) {
             videoContainer.innerHTML = `
             <div id="player"></div>
             `;
         }
-        loadYouTubePlayer(videoId, startTime);
+        loadYouTubePlayer(startTime);
     } else {
         videoContainer.innerHTML = "<p>Link de vídeo inválido.</p>";
     }

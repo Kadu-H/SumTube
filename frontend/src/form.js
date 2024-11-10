@@ -1,4 +1,4 @@
-import {loadVideo, getIdFromUrl, formatTime} from './video';
+import {loadVideo, formatTime, getIdFromUrl} from './video.js';
 
 export const onSubmitPDF = () => {
     if(!onVideo){
@@ -41,9 +41,8 @@ export const onSubmitVideo = async (e) => {
     
     const formData = new FormData(form);
     const urlVideo = formData.get("videoLink");
-    loadVideo(urlVideo);
-
-    const videoId = getIdFromUrl(urlVideo);
+    videoId = getIdFromUrl(urlVideo);
+    loadVideo();
 
     const data = {
         videoId
