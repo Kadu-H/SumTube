@@ -8,4 +8,4 @@ app.use(express.json());
 app.use(cors());
 app.use('/',router);
 
-app.listen(3000, console.log("Backend do SumTube rodando em http://localhost:3000"));
+app.listen(5000, console.log("Backend do SumTube rodando em http://localhost:5000"));

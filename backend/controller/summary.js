@@ -40,7 +40,6 @@ export const generatePdf = async (req, res) => {
                 console.error('Erro ao fazer o download do PDF:', err);
             } else {
                 console.log(`PDF gerado com sucesso`);
-                // Apaga o arquivo após o download
                 await unlink(filePath);
                 console.log(`Arquivo ${filePath} deletado com sucesso`);
             }

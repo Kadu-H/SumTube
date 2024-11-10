@@ -1,3 +1,9 @@
+var videoId;
+var legenda;
+var resumo;
+var onVideo = false;
+var player;
+
 function clickLegenda(button) {
     var offset = button.getAttribute('offset');
     offset = parseFloat(offset);
@@ -9,12 +15,12 @@ function slideScrollLegenda() {
     if (!onVideo) {
         return;
     }
-    
+
     var playerState = player.getPlayerState();
-    if(playerState == 2){
+    if (playerState == 2) {
         return;
     }
-    
+
     var rows = document.querySelectorAll("#legendaRow");
     var videoTimeCurrent = player.getCurrentTime();
 
