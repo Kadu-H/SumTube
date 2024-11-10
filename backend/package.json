@@ -1,6 +1,6 @@
 {
   "name": "sumtube-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -14,7 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "markdown-pdf": "^11.0.0",
+    "md-to-pdf": "^5.2.4",
     "youtube-transcript": "^1.2.1"
   }
 }
